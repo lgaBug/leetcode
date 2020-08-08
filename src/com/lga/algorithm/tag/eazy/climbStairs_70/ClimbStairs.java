@@ -36,4 +36,16 @@ public class ClimbStairs {
         return dp[n-1];
     }
 
+    public static int climbStairs_1(int n) {
+        int pre = 1;
+        int preOfPre = 1;
+        int cur = 1;
+        for (int i = 2; i <= n; i++) {
+            preOfPre = pre;
+            pre = cur;
+            cur = pre + preOfPre;
+        }
+        return cur;
+    }
+
 }
