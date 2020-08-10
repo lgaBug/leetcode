@@ -33,13 +33,18 @@ public class Reverse {
         while (x != 0) {
             int temp = x % 10;
 
-            if (result > maxValue / 10 || (result == maxValue / 10 && temp > maxValue % 10)) {
+            if (Math.abs(result) > maxValue / 10 || (Math.abs(result) == maxValue / 10 && Math.abs(temp) > maxValue % 10)) {
                 return 0;
             }
 
-            if (result < minValue / 10 || (result == minValue / 10) && temp < minValue % 10) {
-                return 0;
-            }
+            //下面的两个判断可以直接用上面的替换
+            //if (result > maxValue / 10 || (result == maxValue / 10 && temp > maxValue % 10)) {
+            //    return 0;
+            //}
+
+            //if (result < minValue / 10 || (result == minValue / 10) && temp < minValue % 10) {
+            //    return 0;
+            //}
             result = result * 10 +temp;
             x /= 10;
         }
