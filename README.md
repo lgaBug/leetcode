@@ -36,7 +36,7 @@
 - Clarification
 - Possible soultions
   - compare (time/space)
-  - optima (加强)
+  - optimal (加强)
 - Coding （多写）
 - Test cases
 
