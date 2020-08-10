@@ -83,10 +83,12 @@ public class MyAtoi {
             if (!Character.isDigit((trim.charAt(i)))) {
                 break;
             }
-
+            //校验是否超过最大值和最小值
             if (Math.abs(result) > maxValue / 10 || (Math.abs(result) == maxValue / 10 && Math.abs(trim.charAt(i) -'0') > maxValue % 10)) {
                 return negative ? minValue : maxValue;
             }
+
+            //下面两个条件判断可以用上面一个判断代替
             //if ((negative ? -result : result) > maxValue / 10 || ((negative ? -result : result) == maxValue / 10 && trim.charAt(i) - '0' > maxValue % 10)) {
             //    return Integer.MAX_VALUE;
             //}
@@ -101,10 +103,10 @@ public class MyAtoi {
 
     @Test
     public void test1() {
-        //Assert.assertEquals(0, myAtoi(""));
-        //Assert.assertEquals(123, myAtoi("  123"));
-        //Assert.assertEquals(-123, myAtoi("  -123"));
-        //Assert.assertEquals(-2147483648, myAtoi("-91283472332"));
+        Assert.assertEquals(0, myAtoi(""));
+        Assert.assertEquals(123, myAtoi("  123"));
+        Assert.assertEquals(-123, myAtoi("  -123"));
+        Assert.assertEquals(-2147483648, myAtoi("-91283472332"));
         Assert.assertEquals(2147483646, myAtoi("2147483646"));
 
     }
