@@ -33,23 +33,4 @@ public class LinkHashMapTest {
 
     }
 
-    @Test
-    public void test2() {
-        LRUCache<Integer, String> lruCache = new LRUCache<>(2);
-
-        lruCache.put(1,"lga");
-        lruCache.put(2,"wl");
-        lruCache.put(3,"zs");
-        lruCache.put(4,"ls");
-        lruCache.get(3);
-        lruCache.put(5,"ww");
-        lruCache.put(3,"111111");
-
-        System.out.println(lruCache.get(4));
-        System.out.println(lruCache.get(3));
-        System.out.println(lruCache.get(5));
-
-
-
-    }
 }

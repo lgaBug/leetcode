@@ -3,6 +3,8 @@ package com.lga.algorithm.tag.medium.myAtoi_8;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 /**
  * subject description:
  * 请你来实现一个 atoi 函数，使其能将字符串转换成整数。
@@ -49,7 +51,7 @@ import org.junit.Test;
  * 输入: "-91283472332"
  * 输出: -2147483648
  * 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。
- *      因此返回 INT_MIN (−231) 。
+ *      因此返回 INT_MIN (−2^31) 。
  *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/string-to-integer-atoi
@@ -108,7 +110,13 @@ public class MyAtoi {
         Assert.assertEquals(-123, myAtoi("  -123"));
         Assert.assertEquals(-2147483648, myAtoi("-91283472332"));
         Assert.assertEquals(2147483646, myAtoi("2147483646"));
-
     }
 
+    @Test
+    public void test2() {
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MAX_VALUE+1);
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.MIN_VALUE-1);
+    }
 }

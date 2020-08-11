@@ -25,7 +25,7 @@ public class LRUCache {
     private int capacity;
     private LinkedHashMap<Integer, Integer> map;
 
-    public LRUCache(int capacity) {
+    public LRUCache(final int capacity) {
         this.capacity = capacity;
         map = new LinkedHashMap<Integer, Integer>(capacity,0.75f,true){
             @Override
