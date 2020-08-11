@@ -22,7 +22,23 @@ import java.util.Arrays;
  */
 public class MoveZeroes {
 
+
     public void moveZeroes(int[] nums) {
+
+        //用于记录非零数的位置
+        int j =0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                if (j != i) {
+                    nums[i] = 0;
+                }
+                j++;
+            }
+        }
+    }
+
+    public void moveZeroes2(int[] nums) {
         int j = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 0) {
