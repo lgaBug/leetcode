@@ -50,6 +50,20 @@ public class AddToArrayForm {
 
     public List<Integer> addToArrayForm(int[] A, int K) {
         List<Integer> resultList = new ArrayList<Integer>();
+        int i = A.length;
+        while (--i >= 0 || K != 0) {
+            if (i >= 0) {
+                K += A[i];
+            }
+            resultList.add(K % 10);
+            K /= 10;
+        }
+        Collections.reverse(resultList);
+        return resultList;
+    }
+
+    public List<Integer> addToArrayForm2(int[] A, int K) {
+        List<Integer> resultList = new ArrayList<Integer>();
         int temp = 0;
         for (int i = A.length - 1; (i >= 0 || K != 0); i--) {
             if (i < 0) {
