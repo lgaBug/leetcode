@@ -31,7 +31,7 @@ import java.util.Arrays;
  */
 public class PlusOne {
 
-    public int[] plusOne(int[] digits) {
+    public int[] plusOne_1(int[] digits) {
         for (int i = digits.length - 1; i >= 0; i--) {
             digits[i]++;
             digits[i] = digits[i] % 10;
@@ -43,6 +43,25 @@ public class PlusOne {
         return digits;
     }
 
+
+
+
+    public int[] plusOne(int[] digits) {
+
+        int len = digits.length;
+        while (len-->0) {
+            int temp = digits[len] + 1;
+            if (temp % 10 == 0) {
+                digits[len] = temp % 10;
+            }else{
+                digits[len] = temp;
+                return digits;
+            }
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
     @Test
     public void test1() {
 

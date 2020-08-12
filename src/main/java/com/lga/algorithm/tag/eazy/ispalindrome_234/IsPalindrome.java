@@ -49,6 +49,38 @@ public class IsPalindrome {
         return true;
     }
 
+    //使用快慢指针
+    public boolean isPalindrome1(ListNode head) {
+
+        if (head == null || head.next == null) return true;
+        //快指针
+        ListNode f = head;
+        //慢指针
+        ListNode s = head;
+        ListNode temp = null;
+
+        //反转慢指针遍历过的值
+        while (f != null && f.next != null) {
+            ListNode cur = s;
+            s = s.next;
+            f = f.next.next;
+            cur.next = temp;
+            temp = cur;
+        }
+        //当总结点数为奇数时，中间的值不需要比较，所有慢指针需求取下一个节点
+        if (f != null) {
+            s = s.next;
+        }
+
+        //比较temp 和 s 链表的数据
+        while (s != null) {
+            if (s.val != temp.val) return false;
+            s = s.next;
+            temp = temp.next;
+        }
+
+        return true;
+    }
 
     @Test
     public void test1() {
@@ -56,7 +88,7 @@ public class IsPalindrome {
         listNode.next = new ListNode(2);
         listNode.next.next = new ListNode(2);
         listNode.next.next.next = new ListNode(1);
-        Assert.assertEquals(true, isPalindrome(listNode));
+        Assert.assertEquals(true, isPalindrome1(listNode));
     }
 
     @Test
@@ -65,7 +97,7 @@ public class IsPalindrome {
         listNode1.next = new ListNode(2);
         listNode1.next.next = new ListNode(2);
         listNode1.next.next.next = new ListNode(3);
-        Assert.assertEquals(false, isPalindrome(listNode1));
+        Assert.assertEquals(false, isPalindrome1(listNode1));
     }
 
     @Test
@@ -73,7 +105,7 @@ public class IsPalindrome {
         ListNode listNode3 = new ListNode(3);
         listNode3.next = new ListNode(0);
         listNode3.next.next = new ListNode(0);
-        Assert.assertEquals(false, isPalindrome(listNode3));
+        Assert.assertEquals(false, isPalindrome1(listNode3));
     }
 
 }

@@ -72,10 +72,24 @@ public class MoveZeroes {
 
     }
 
+    public void moveZeroes3(int[] nums) {
+        //用于记录非零元素
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j++] = nums[i];
+                if (j != i) {
+                    nums[i] = 0;
+                }
+            }
+        }
+    }
+
+
     @Test
     public void test1() {
         int[] nums = {0, 1, 0, 3, 12};
-        moveZeroes(nums);
+            moveZeroes3(nums);
         Assert.assertTrue(Arrays.equals(nums, new int[]{1, 3, 12, 0, 0}));
 
     }
@@ -83,7 +97,7 @@ public class MoveZeroes {
     @Test
     public void test2() {
         int[] nums = {0, 0, 1};
-        moveZeroes(nums);
+        moveZeroes3(nums);
         Assert.assertTrue(Arrays.equals(nums, new int[]{1, 0, 0}));
 
     }

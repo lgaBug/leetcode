@@ -97,19 +97,34 @@ public class TwoSum {
         return ans;
     }
 
+    /**
+     * 暴力法
+     * 时间复杂度O(n^2)
+     */
+    public int[] twoSum_force(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
     @Test
     public void test1() {
-        Assert.assertTrue(Arrays.equals(new int[]{0, 1}, twoSum(new int[]{2, 7, 11, 15}, 9)));
+        Assert.assertTrue(Arrays.equals(new int[]{0, 1}, twoSum(new int[]{2, 7, 11, 15}, 9))||Arrays.equals(new int[]{1, 0}, twoSum(new int[]{2, 7, 11, 15}, 9)));
     }
 
     @Test
     public void test2() {
-        Assert.assertTrue(Arrays.equals(new int[]{1, 2}, twoSum(new int[]{3, 2, 4}, 6)));
+        Assert.assertTrue(Arrays.equals(new int[]{1, 2}, twoSum(new int[]{3, 2, 4}, 6))||Arrays.equals(new int[]{2, 1}, twoSum(new int[]{3, 2, 4}, 6)));
     }
 
     @Test
     public void test3() {
-        Assert.assertTrue(Arrays.equals(new int[]{1, 2}, twoSum(new int[]{2, 5, 5, 11}, 10)));
+        Assert.assertTrue(Arrays.equals(new int[]{1, 2}, twoSum(new int[]{2, 5, 5, 11}, 10))||Arrays.equals(new int[]{2, 1}, twoSum(new int[]{2, 5, 5, 11}, 10)));
     }
 
 }

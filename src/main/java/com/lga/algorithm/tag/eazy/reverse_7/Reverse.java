@@ -51,6 +51,21 @@ public class Reverse {
         return result;
     }
 
+    public int reverse_1(int x) {
+        int ans = 0;
+        while (x != 0) {
+            int cur = x % 10;
+            if (Math.abs(ans) > Integer.MAX_VALUE / 10 || (Math.abs(ans) == Integer.MAX_VALUE / 10 && Math.abs(cur) > Integer.MAX_VALUE % 10)) {
+                return 0;
+            }
+            ans = ans * 10 + cur;
+            x /= 10;
+        }
+        return ans;
+    }
+
+
+
     @Test
     public void test1() {
 
