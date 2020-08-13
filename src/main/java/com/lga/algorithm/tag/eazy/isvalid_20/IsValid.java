@@ -3,9 +3,7 @@ package com.lga.algorithm.tag.eazy.isvalid_20;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. 有效的括号
@@ -67,18 +65,41 @@ public class IsValid {
         return stack.isEmpty();
     }
 
-    private boolean isMatch(Character s, Stack<Character> stack) {
+    public boolean isValid_deque(String s) {
+        if (s == null || s.length() % 2 == 1) return false;
+        Map<Character, Character> map = new HashMap() {
+            {
+                put('(', ')');
+                put('{', '}');
+                put('[', ']');
+            }
+        };
+        Deque<Character> deque = new LinkedList();
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                deque.push(s.charAt(i));
+            } else {
+                if (deque.isEmpty() || map.get(deque.pop()) != s.charAt(i)) return false;
+            }
+
+        }
+        return deque.isEmpty();
+
+    }
+
+
+        private boolean isMatch(Character s, Stack<Character> stack) {
         return (stack.peek() == '[' && s != ']') || (stack.peek() == '(' && s != ')') || (stack.peek() == '{' && s != '}');
     }
 
     @Test
     public void test1() {
-        Assert.assertTrue(isValid("()"));
-        Assert.assertTrue(isValid("()[]{}"));
-        Assert.assertFalse(isValid("(]"));
-        Assert.assertFalse(isValid("([)]"));
-        Assert.assertTrue(isValid("{[]}"));
-        Assert.assertFalse(isValid("{"));
-        Assert.assertFalse(isValid("}"));
+        Assert.assertTrue(isValid_deque("()"));
+        Assert.assertTrue(isValid_deque("()[]{}"));
+        Assert.assertFalse(isValid_deque("(]"));
+        Assert.assertFalse(isValid_deque("([)]"));
+        Assert.assertTrue(isValid_deque("{[]}"));
+        Assert.assertFalse(isValid_deque("{"));
+        Assert.assertFalse(isValid_deque("}"));
     }
 }
