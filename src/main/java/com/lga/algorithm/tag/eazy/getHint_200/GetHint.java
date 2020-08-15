@@ -14,15 +14,12 @@ public class GetHint {
         int b = 0;
         int[] arr = new int[10];
 
-        char[] sChars = secret.toCharArray();
-        char[] gChars = guess.toCharArray();
-
-        for (int i = 0; i < sChars.length; i++) {
-            if (sChars[i] == gChars[i]) {
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
                 a++;
             } else {
-                arr[sChars[i] - '0']++;
-                arr[gChars[i] - '0']--;
+                arr[secret.charAt(i) - '0']++;
+                arr[guess.charAt(i) - '0']--;
             }
         }
         for (int i = 0; i < arr.length; i++) {
@@ -30,7 +27,7 @@ public class GetHint {
                 b += arr[i];
             }
         }
-        b = gChars.length - b - a;
+        b = guess.length() - b - a;
         return a + "A" + b + "B";
     }
 
