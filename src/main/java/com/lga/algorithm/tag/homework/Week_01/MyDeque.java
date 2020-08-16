@@ -3,6 +3,13 @@ package com.lga.algorithm.tag.homework.Week_01;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * define deque
+ *
+ * @author liugaoan
+ * @param <E>
+ */
+
 public class MyDeque<E> {
 
     private MyLinkNode<E> myLinkNode;
@@ -28,6 +35,8 @@ public class MyDeque<E> {
 
     /**
      * remove the first element
+     *
+     * @return E
      */
     public E pop() {
         if (myLinkNode != null) {
@@ -43,7 +52,7 @@ public class MyDeque<E> {
     /**
      * peek the first element,but don't remove elment
      *
-     * @return
+     * @return E
      */
     public E peek() {
         if (myLinkNode != null) return myLinkNode.getValue();
