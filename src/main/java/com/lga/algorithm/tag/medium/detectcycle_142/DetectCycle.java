@@ -40,6 +40,11 @@ public class DetectCycle {
         return null;
     }
 
+    /**
+     * 这类链表题目一般都是使用双指针法解决的，例如寻找距离尾部第K个节点、寻找环入口、寻找公共尾部入口等。
+     * @param head
+     * @return
+     */
     public ListNode detectCycle_dobulePoint(ListNode head) {
         ListNode f = head;
         ListNode s = head;
