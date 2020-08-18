@@ -49,12 +49,27 @@ public class RemoveOuterParentheses {
         return sb.toString();
     }
 
+    /**
+     * 上面的进阶版本
+     * @param S
+     * @return
+     */
+    public String removeOuterParentheses2(String S) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (Character c : S.toCharArray()) {
+            if(c =='(' && count++ >0) sb.append(c);
+            if(c == ')' && count-->1) sb.append(c);
+        }
+        return sb.toString();
+    }
+
 
     @Test
     public void test() {
-        Assert.assertEquals("()()()", removeOuterParentheses1("(()())(())"));
+        Assert.assertEquals("()()()", removeOuterParentheses2("(()())(())"));
 
-        Assert.assertEquals("()()()()(())", removeOuterParentheses1("(()())(())(()(()))"));
+        Assert.assertEquals("()()()()(())", removeOuterParentheses2("(()())(())(()(()))"));
 
 
     }
