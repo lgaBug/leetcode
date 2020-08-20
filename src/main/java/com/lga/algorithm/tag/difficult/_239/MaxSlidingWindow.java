@@ -71,12 +71,33 @@ public class MaxSlidingWindow {
 
     }
 
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        int[] ans = new int[nums.length - k + 1];
+
+        //构建一个最大堆
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+
+        for (int i = 0, j = i - k + 1; i < nums.length; i++, j++) {
+            maxHeap.offer(nums[i]);
+            if (maxHeap.size() == k) {
+                ans[j] = maxHeap.peek();
+                maxHeap.remove(nums[j]);
+            }
+        }
+        return ans;
+    }
+
     @Test
     public void test1() {
-        Assert.assertTrue(Arrays.equals(new int[]{3, 3, 2,5}, maxSlidingWindow1(new int[]{1,3,1,2,0,5}, 3)));
-        Assert.assertTrue(Arrays.equals(new int[]{3, 3, -1, 5, 5, 6, 7}, maxSlidingWindow1(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 2)));
-        Assert.assertTrue(Arrays.equals(new int[]{3, 3, 5, 5, 6, 7}, maxSlidingWindow1(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
-        Assert.assertTrue(Arrays.equals(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, maxSlidingWindow1(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 1)));
+        Assert.assertTrue(Arrays.equals(new int[]{3, 3, 2, 5}, maxSlidingWindow2(new int[]{1, 3, 1, 2, 0, 5}, 3)));
+        Assert.assertTrue(Arrays.equals(new int[]{3, 3, -1, 5, 5, 6, 7}, maxSlidingWindow2(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 2)));
+        Assert.assertTrue(Arrays.equals(new int[]{3, 3, 5, 5, 6, 7}, maxSlidingWindow2(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
+        Assert.assertTrue(Arrays.equals(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, maxSlidingWindow2(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 1)));
     }
 
 }
