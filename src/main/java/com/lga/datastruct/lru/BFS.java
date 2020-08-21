@@ -1,5 +1,6 @@
 package com.lga.datastruct.lru;
 
+import javafx.scene.web.WebView;
 import org.junit.Test;
 import sun.reflect.ReflectionFactory;
 
@@ -58,6 +59,47 @@ public class BFS {
         }
     }
 
+    /**
+     * 图中的最短路径问题
+     * @param graphMap
+     * @param startVertx
+     * @param endVertx
+     */
+    public void shortest(Map<String, String[]> graphMap,String startVertx,String endVertx) {
+        if (!graphMap.containsKey(startVertx)) throw new IllegalArgumentException("该顶点不存在");
+
+        //记录已经访问过的节点
+        Set<String> accessed = new HashSet<>();
+
+        Map<String, String> parentTable = new HashMap<>();
+
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(startVertx);
+        accessed.add(startVertx);
+        parentTable.put(startVertx, "NONE");
+
+        while (!queue.isEmpty()) {
+            String removeVertx = queue.poll();
+            if (graphMap.containsKey(removeVertx)) {
+                String[] vertxs = graphMap.get(removeVertx);
+                for (String vertx : vertxs) {
+                    if (!accessed.contains(vertx)) {
+                        queue.add(vertx);
+                        accessed.add(vertx);
+                        parentTable.put(vertx, removeVertx);
+                    }
+                }
+            }
+        }
+
+        while (!"NONE".equals(endVertx)) {
+            System.out.print(endVertx+"<-");
+            endVertx = parentTable.get(endVertx);
+
+        }
+
+    }
+
     @Test
     public void test_binaryTreeBfs() {
 
@@ -92,7 +134,6 @@ public class BFS {
     public void test_graphBfs() {
 
         Map<String, String[]> grapMap = new HashMap<String, String[]>(){{
-
             put("A",new String[]{"B","C"});
             put("B",new String[]{"D","E"});
             put("C",new String[]{"E","F","A"});
@@ -103,6 +144,25 @@ public class BFS {
         }};
 
         graphBfs(grapMap, "C");
+    }
+
+    @Test
+    public void test_shortest() {
+        Map<String, String[]> grapMap = new HashMap<String, String[]>(){{
+            put("A",new String[]{"B","C"});
+            put("B",new String[]{"D","E"});
+            put("C",new String[]{"E","F","A"});
+            put("D",new String[]{"B"});
+            put("E",new String[]{"B","G","C"});
+            put("F",new String[]{"C","I"});
+            put("G",new String[]{"E","J"});
+            put("H", new String[]{"I", "J"});
+            put("I", new String[]{"F", "H"});
+            put("J", new String[]{"G", "H"});
+
+        }};
+
+        shortest(grapMap,"A","H");
     }
 
 
