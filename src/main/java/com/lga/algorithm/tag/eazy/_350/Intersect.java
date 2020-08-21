@@ -47,7 +47,7 @@ public class Intersect {
     public void testArrayCopy() {
         int[] array = {1, 2, 3, 4, 5, 6};
 
-        System.arraycopy(array,0,array,1,3);
+        System.arraycopy(array,3,array,0,2);
 
         System.out.println(Arrays.toString(array));
     }
