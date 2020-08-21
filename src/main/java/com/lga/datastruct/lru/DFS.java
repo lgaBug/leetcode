@@ -2,9 +2,7 @@ package com.lga.datastruct.lru;
 
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * deep first search
@@ -40,13 +38,35 @@ public class DFS {
      */
     public void graph_dfs(Map<String, String[]> graphMap, String startVertx) {
 
+        if (!graphMap.containsKey(startVertx)) throw new IllegalArgumentException("该顶点不存在");
+
+        //记录已经访问过的节点
+        Set<String> accessed = new HashSet<>();
+        Stack<String> stack = new Stack<>();
+        stack.add(startVertx);
+        accessed.add(startVertx);
+
+        while (!stack.isEmpty()) {
+            String removeVertx = stack.pop();
+            System.out.print(removeVertx + "->");
+            if (graphMap.containsKey(removeVertx)) {
+                String[] vertxs = graphMap.get(removeVertx);
+                for (String vertx : vertxs) {
+                    if (!accessed.contains(vertx)) {
+                        stack.add(vertx);
+                        accessed.add(vertx);
+                    }
+                }
+            }
+        }
+
     }
 
 
 
 
     @Test
-    public void test() {
+    public void test_binaryTree_dfs() {
         TreeNode treeNode0 = new TreeNode(1);
         TreeNode treeNode1 = new TreeNode(2);
         TreeNode treeNode2 = new TreeNode(3);
@@ -72,4 +92,21 @@ public class DFS {
         binaryTree_dfs(treeNode0);
     }
 
+    @Test
+    public void test_graph_dfs() {
+
+        Map<String, String[]> grapMap = new HashMap<String, String[]>(){{
+
+            put("A",new String[]{"B","C"});
+            put("B",new String[]{"D","E"});
+            put("C",new String[]{"E","F","A"});
+            put("D",new String[]{"B"});
+            put("E",new String[]{"B","G","C"});
+            put("F",new String[]{"C"});
+            put("G",new String[]{"E"});
+        }};
+
+        graph_dfs(grapMap, "C");
+
+    }
 }
