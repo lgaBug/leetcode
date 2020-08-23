@@ -81,7 +81,7 @@ public class BFS {
         while (!queue.isEmpty()) {
             String removeVertx = queue.poll();
             if (graphMap.containsKey(removeVertx)) {
-                String[] vertxs = graphMap.get(removeVertx);
+                String[] vertxs = graphMap.get(removeVertx); 
                 for (String vertx : vertxs) {
                     if (!accessed.contains(vertx)) {
                         queue.add(vertx);
