@@ -36,7 +36,7 @@ public class Sort {
     }
 
     /**
-     * 归并排序
+     * 归并排序 时间复杂度O(nlogn)
      * @param arr
      */
     public void mergeSort(int[] arr) {
@@ -95,7 +95,6 @@ public class Sort {
 
     @Test
     public void test_insertSort() {
-
         int[] arr = new int[]{3, 2, 1, 6, 4, 5};
         insertSort(arr);
         Assert.assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6}, arr));
@@ -103,7 +102,6 @@ public class Sort {
 
     @Test
     public void test_mergeSort() {
-
         int[] arr = new int[]{3, 2, 1, 6, 4, 5};
         mergeSort(arr);
         Assert.assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6}, arr));
