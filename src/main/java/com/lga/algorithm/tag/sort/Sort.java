@@ -93,6 +93,39 @@ public class Sort {
 
     }
 
+    /**
+     * 快速排序算法
+     * @param arr
+     */
+    public void quickSort(int[] arr) {
+        quickSort_part(arr,0,arr.length-1);
+    }
+
+    private void quickSort_part(int[] arr, int p, int r) {
+        if(p>=r) return;
+        int q = partition(arr, p, r);
+        quickSort_part(arr, p, q-1);
+        quickSort_part(arr, q + 1, r);
+    }
+
+    private int partition(int[] arr, int p, int r) {
+        int pivot = arr[r];
+        int i = p;
+        for (int j = p; j < r; j++) {
+            if (arr[j] < pivot) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[r];
+        arr[r] = temp;
+
+        return i;
+    }
+
     @Test
     public void test_insertSort() {
         int[] arr = new int[]{3, 2, 1, 6, 4, 5};
@@ -104,6 +137,13 @@ public class Sort {
     public void test_mergeSort() {
         int[] arr = new int[]{3, 2, 1, 6, 4, 5};
         mergeSort(arr);
+        Assert.assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6}, arr));
+    }
+
+    @Test
+    public void test_quickSort() {
+        int[] arr = new int[]{3, 2, 1, 6, 4, 5};
+        quickSort(arr);
         Assert.assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6}, arr));
     }
 
