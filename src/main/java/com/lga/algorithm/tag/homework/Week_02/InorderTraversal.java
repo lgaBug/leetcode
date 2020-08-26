@@ -1,6 +1,7 @@
 package com.lga.algorithm.tag.homework.Week_02;
 
 import com.lga.datastruct.lru.TreeNode;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,5 +51,27 @@ public class InorderTraversal {
         return ans;
     }
 
+
+    @Test
+    public void  test_inorderTraversal_recursion() {
+
+        TreeNode root = new TreeNode(7);
+        TreeNode root1 = new TreeNode(5);
+        TreeNode root2 = new TreeNode(9);
+        TreeNode root3 = new TreeNode(3);
+        TreeNode root4 = new TreeNode(6);
+        TreeNode root5 = new TreeNode(8);
+        TreeNode root6 = new TreeNode(10);
+
+        root1.left = root3;
+        root1.right = root4;
+        root2.left = root5;
+        root2.right = root6;
+        root.left = root1;
+        root.right = root2;
+
+
+        inorderTraversal_recursion(root);
+    }
 
 }
