@@ -1,52 +1,70 @@
 package com.lga.algorithm.tag.medium._98;
 
 import com.lga.datastruct.lru.TreeNode;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * 98. 验证二叉搜索树
- *
  * https://leetcode-cn.com/problems/validate-binary-search-tree/
  */
 public class IsValidBST {
 
-
-    long pre = Long.MIN_VALUE;
+    Long pre = Long.MIN_VALUE;
 
     public boolean isValidBST(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        // 访问左子树
-        if (!isValidBST(root.left)) {
-            return false;
-        }
-        // 访问当前节点：如果当前节点小于等于中序遍历的前一个节点，说明不满足BST，返回 false；否则继续遍历。
-        if (root.val <= pre) {
-            return false;
-        }
-        pre = root.val;
-        // 访问右子树
-        return isValidBST(root.right);
+        //return isBST(root, Long.MAX_VALUE, Long.MIN_VALUE);
+        return isIncreamentByInOrder(root);
     }
 
-    private boolean helper(TreeNode root, Integer lower, Integer upper) {
-
+    /**
+     * 符合搜索二叉树的特征，则中序遍历是递增的
+     * @param root
+     * @return
+     */
+    private boolean isIncreamentByInOrder(TreeNode root) {
         if (root == null) return true;
 
-        int curVal = root.val;
-
-        //左子树大于根节点则返回false
-        if (curVal < lower) return false;
-        //右子树小于当前根节点则返回false
-        if (curVal > upper) return false;
-
-        //遍历左子树
-        if (!helper(root.left, lower, curVal)) return false;
-
-        //遍历右子树
-        if (!helper(root.right, curVal, upper)) return false;
-
+        if (!isIncreamentByInOrder(root.left)) return false;
+        if (root.val < pre) return false;
+        pre =Long.valueOf(root.val);
+        if (!isIncreamentByInOrder(root.right)) return false;
         return true;
+
+    }
+
+    /**
+     * 根据左子树小于根节点，右子树大于根节点的特征来遍历树
+     *
+     * @param root
+     * @param maxValue
+     * @param minValue
+     * @return
+     */
+    private boolean isBST(TreeNode root, long maxValue, long minValue) {
+        if (root == null) return true;
+        if (root.val >= maxValue || root.val <= minValue) return false;
+        return isBST(root.left, root.val, minValue) && isBST(root.right, maxValue, root.val);
+    }
+
+    @Test
+    public void test() {
+        TreeNode root = new TreeNode(5);
+        TreeNode root1 = new TreeNode(1);
+        TreeNode root2 = new TreeNode(6);
+        TreeNode root3 = null;
+        TreeNode root4 = null;
+        TreeNode root5 = new TreeNode(3);
+        TreeNode root6 = new TreeNode(7);
+
+        root.left = root1;
+        root.right = root2;
+
+        root2.left = root5;
+        root2.right = root6;
+
+        boolean validBST = isValidBST(root);
+        Assert.assertFalse(validBST);
 
     }
 }
