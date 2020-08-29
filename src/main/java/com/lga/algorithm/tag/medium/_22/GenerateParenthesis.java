@@ -3,6 +3,7 @@ package com.lga.algorithm.tag.medium._22;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -51,8 +52,17 @@ public class GenerateParenthesis {
         }
         generate_1(i+1,n, s + "(");
         generate_1(i+1,n, s + ")");
+    }
 
 
+    @Test
+    public List<String> generateParenthesis_2(int n) {
+
+        List<String> ans = new LinkedList<>();
+
+        //
+
+        return ans;
     }
 
     @Test
