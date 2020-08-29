@@ -1,7 +1,9 @@
 package com.lga.algorithm.tag.medium._15;
 
-import java.util.ArrayList;
+import org.junit.Test;
+
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,32 +29,38 @@ import java.util.List;
 public class threeSum {
 
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        if (nums == null || nums.length < 3) {
-            return result;
-        }
+        List<List<Integer>> ans = new LinkedList<>();
         Arrays.sort(nums);//排序
-        for (int i = 0; i < nums.length; i++) {
 
-            if (nums[i] > 0) break; //终止条件
-            int L = i + 1;
-            int R = nums.length - 1;
-            if (i > 0 && nums[i] == nums[i - 1]) continue; //去重
-            while (L < R) {
-                int sum = nums[i] + nums[L] + nums[R];
-                if (sum == 0) {
-                    result.add(Arrays.asList(nums[i], nums[L], nums[R]));
-                    while (L < R && nums[L] == nums[L + 1]) L++;
-                    while (L < R && nums[R] == nums[R - 1]) R--;
-                    L++;
-                    R--;
-                } else if (sum > 0) {
-                    R--;
-                } else if (sum < 0) {
-                    L++;
+        for(int i =0;i<nums.length-2;i++){
+            if (nums[i] > 0) break;
+            int l = i+1;
+            int r = nums.length-1;
+            if(i >0 && nums[i] == nums[i-1]) continue;
+            while(l < r){
+                int sum = nums[i] + nums[l] + nums[r];
+                if(sum == 0){
+                    ans.add(Arrays.asList(nums[i],nums[l],nums[r]));
+                    while(l<r && nums[l] == nums[l+1]) l++;
+                    while(l<r && nums[r] == nums[r-1]) r--;
+                    l++;
+                    r--;
+                }else if(sum > 0){
+                    r--;
+                }else if (sum <0){
+                    l++;
                 }
             }
         }
-        return result;
+        return ans;
+    }
+
+
+    @Test
+    public void test() {
+        System.out.println(threeSum(new int[]{0,0,0}));
+
+        System.out.println(threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
+
     }
 }
