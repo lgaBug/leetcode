@@ -11,24 +11,26 @@ import java.util.List;
  */
 public class Subsets {
 
+    List<List<Integer>> ans = new LinkedList<>();
     public List<List<Integer>> subsets(int[] nums) {
+        if (nums == null) return null;
 
-        List<List<Integer>> ans = new LinkedList<>();
-        backtrack(0, nums, ans, new LinkedList<>());
+        backtrace(0, nums, new LinkedList<Integer>());
+
         return ans;
     }
 
-    private void backtrack(int j, int[] nums, List<List<Integer>> ans, LinkedList<Integer> temp) {
-        ans.add(new LinkedList<>(temp));
-        for (; j < nums.length; j++) {
-            temp.add(nums[j]);
-            backtrack(j + 1, nums, ans, temp);
-            temp.remove(temp.size() - 1);
+    private void backtrace(int i, int[] nums, LinkedList<Integer> trace) {
+        ans.add(new LinkedList<>(trace));
+        while (i < nums.length) {
+            trace.add(nums[i]);
+            backtrace(++i, nums, trace);
+            trace.removeLast();
         }
     }
 
     @Test
     public void test() {
-        subsets(new int[]{1,2,3});
+        subsets(new int[]{1, 2, 3});
     }
 }
