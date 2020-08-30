@@ -11,8 +11,6 @@ import java.util.Set;
  */
 public class GetKthMagicNumber {
 
-
-
     public int getKthMagicNumber(int k) {
         Set<Long> set = new HashSet<>();
         Queue<Long> queue = new PriorityQueue<>();
@@ -34,4 +32,11 @@ public class GetKthMagicNumber {
 
         }
     }
+
+    //todo 待进一步优化
+    public int getKthMagicNumber_1(int k) {
+
+        return 0;
+    }
+
 }
