@@ -54,6 +54,33 @@ public class GenerateParenthesis {
         generate_1(i+1,n, s + ")");
     }
 
+    /**
+     * 深度遍历
+     * @param n
+     * @return
+     */
+    public List<String> generateParenthesis_dfs(int n) {
+        List<String> ans = new LinkedList<>();
+        dfs("", n, n, ans);
+        return ans;
+    }
+
+    private void dfs(String s, int left, int right, List<String> ans) {
+        if (left == 0 && right == 0) {
+            ans.add(s);
+            return;
+        }
+
+        //如果左括号还剩余，则可以添加
+        if (left >0) {
+            dfs(s + "(", left - 1, right, ans);
+        }
+
+        //如果右括号剩余的比左括号多，则可以添加
+        if (left < right) {
+            dfs(s + ")", left, right-1, ans);
+        }
+    }
 
     @Test
     public List<String> generateParenthesis_2(int n) {
