@@ -12,6 +12,7 @@ public class LevelOrder {
 
     /**
      * 队列实现
+     *
      * @param root
      * @return
      */
@@ -40,4 +41,26 @@ public class LevelOrder {
         return ans;
     }
 
+    /**
+     * 深度遍历，前序
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder_dfs(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<>();
+        if (root != null) dfs(0, root, ans);
+        return ans;
     }
+
+    private void dfs(int level, TreeNode root, List<List<Integer>> ans) {
+
+        if (ans.size() - 1 < level) {
+            ans.add(new LinkedList<Integer>());
+        }
+        ans.get(level).add(root.val);
+        if (root.left != null) dfs(level + 1, root.left, ans);
+        if (root.right != null) dfs(level + 1, root.right, ans);
+
+    }
+}
