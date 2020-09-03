@@ -10,11 +10,11 @@ public class FindContentChildren {
 
     public int findContentChildren(int[] g, int[] s) {
         int ans = 0;
+        int i = 0;
         Arrays.sort(g);
         Arrays.sort(s);
-
-        for (int i = 0; i < s.length && ans < g.length; i++) {
-            if (g[ans] <= s[i]) {
+        while (i < s.length && ans < g.length) {
+            if (g[ans] <= s[i++]) {
                 ans++;
             }
         }
