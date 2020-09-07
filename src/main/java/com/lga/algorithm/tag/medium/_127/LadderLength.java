@@ -22,7 +22,7 @@ public class LadderLength {
     private void backtrace(String start, String end, List<String> wordList, int step, Set<String> set) {
         if (start.equals(end)) min = Math.min(min, step);
         for (String str : wordList) {
-            if (!set.contains(str)) continue;
+            if (set.contains(str)) continue;
             int count = 0;
             for (int j = 0; j < start.length(); j++) {
                 if (start.charAt(j) != str.charAt(j))

@@ -1,9 +1,9 @@
-package com.lga.algorithm.tag.eazy._455;
+package com.lga.algorithm.tag.homework.Week_04;
 
 import java.util.Arrays;
 
 /**
- * 455. 分发饼干 贪心算法
+ * 455. 分发饼干
  * https://leetcode-cn.com/problems/assign-cookies/description/
  */
 public class FindContentChildren {
