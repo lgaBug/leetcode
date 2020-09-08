@@ -6,32 +6,29 @@ package com.lga.algorithm.tag.medium._560;
  */
 public class SubarraySum {
 
-
-        public int subarraySum(int[] nums, int k) {
-            int len = nums.length;
-            int count = 0;
-            for (int left = 0; left < len; left++) {
-                for (int right = left; right < len; right++) {
-
-                    int sum = 0;
-                    String str = "";
-                    for (int i = left; i <= right; i++) {
-                        sum += nums[i];
-                        str +=nums[i] +",";
-                    }
-                    System.out.println(str);
-                    if (sum == k) {
-                        count++;
-                    }
-                }
+    /**
+     * 暴力法
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int subarraySum(int[] nums, int k) {
+        int len = nums.length;
+        int count = 0;
+        for (int i = 0; i < len; i++) {
+            int sum = 0;
+            for (int j = i; j < len;j++) {
+                sum += nums[j];
+                if (sum == k) count++;
             }
-            return count;
         }
+        return count;
+    }
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 3};
+        int[] nums = new int[]{1, 1, 1};
         int k = 2;
         SubarraySum solution = new SubarraySum();
         int res = solution.subarraySum(nums, k);
-        //System.out.println(res);
+        System.out.println(res);
     }
 }
