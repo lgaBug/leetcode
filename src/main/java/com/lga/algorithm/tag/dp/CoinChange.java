@@ -66,7 +66,7 @@ public class CoinChange {
         if (amount < 0) return -1;
         int res = Integer.MAX_VALUE;
         for (int coinValue : coins) {
-            int subproblem = coinChange_cache(coins, amount - coinValue);
+            int subproblem = coinChange_rec_01(coins, amount - coinValue);
             if (subproblem == -1) {
                 continue;
             }
