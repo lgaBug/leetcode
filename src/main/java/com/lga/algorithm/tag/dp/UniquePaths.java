@@ -1,4 +1,4 @@
-package com.lga.algorithm.tag.dp._62;
+package com.lga.algorithm.tag.dp;
 
 /**
  * 62. 不同路径
