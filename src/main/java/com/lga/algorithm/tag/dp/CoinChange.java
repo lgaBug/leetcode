@@ -1,5 +1,6 @@
 package com.lga.algorithm.tag.dp;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,6 +75,20 @@ public class CoinChange {
         }
         res = res == Integer.MAX_VALUE ? -1 : res;
         return res;
+    }
+
+    public int coinChange_dp(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp,amount+1);
+        dp[0] = 0;
+        for (int i = 0; i <= amount; i++) {
+            for (int coin : coins) {
+
+                if (i-coin<0) continue;
+                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+            }
+        }
+        return dp[amount] == amount+1?-1:dp[amount];
     }
 
 }
