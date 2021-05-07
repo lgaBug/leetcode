@@ -16,7 +16,7 @@ public class ListNode {
         val = x;
     }
 
-    public void print(ListNode head) {
+    public static void print(ListNode head) {
 
         while (head != null) {
             System.out.print(head.val +"->");
