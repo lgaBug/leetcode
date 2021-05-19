@@ -4,7 +4,9 @@ package com.lga.algorithm.tag.linklist;
 import com.lga.algorithm.tag.eazy._234.IsPalindrome;
 import com.lga.datastruct.lru.ListNode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 链表相关的题目
@@ -14,30 +16,20 @@ public class LinkedListMain {
 
     public static void main(String[] args) {
 
+        final LinkedListMain linkedListMain = new LinkedListMain();
+        ListNode listNode5 = new ListNode(5);
+        ListNode listNode4 = new ListNode(4, listNode5);
+        ListNode listNode3 = new ListNode(3, listNode4);
+        ListNode listNode2 = new ListNode(2, listNode3);
+        ListNode listNode1 = new ListNode(1, listNode2);
 
-//        ListNode listNode5 = new ListNode(1);
-//        ListNode listNode4 = new ListNode(2, listNode5);
-//        ListNode listNode3 = new ListNode(3, listNode4);
-//        ListNode listNode2 = new ListNode(2, listNode3);
-//        ListNode listNode1 = new ListNode(1, listNode2);
 //
-//        System.out.println("isPalindrome = " + isPalindrome(listNode1));
+        ListNode.print(linkedListMain.rotateRight(listNode1,2));
 
 
         // ======================================================================================================
 
 
-        ListNode listNode3 = new ListNode(4);
-        ListNode listNode2 = new ListNode(2, listNode3);
-        ListNode listNode1 = new ListNode(1, listNode2);
-
-        ListNode listNode6 = new ListNode(4);
-        ListNode listNode5 = new ListNode(3, listNode6);
-        ListNode listNode4 = new ListNode(1, listNode5);
-
-        final ListNode listNode = mergeTwoLists(listNode1, listNode4);
-
-        ListNode.print(listNode);
 
 
     }
@@ -137,7 +129,134 @@ public class LinkedListMain {
         }
 
         return head;
+    }
+
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+        if (headA == null || headB == null) return null;
+
+        Set<ListNode> set = new HashSet();
+
+        while (headA != null) {
+            set.add(headA);
+            headA = headA.next;
+        }
+
+
+        while (headB != null) {
+            if (set.contains(headB)) {
+                return headB;
+            }
+            headB = headB.next;
+        }
+
+        return null;
+    }
+
+
+    /**
+     * 203. 移除链表元素
+     * 通过哨兵简化边界情况
+     *
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode removeElements(ListNode head, int val) {
+
+        if (head == null) return null;
+
+        ListNode dummy = new ListNode(-1, head);
+
+        ListNode pre = dummy;
+
+        while (head != null) {
+            if (val == head.val) {
+                pre.next = pre.next.next;
+                head = head.next;
+                continue;
+            }
+            pre = pre.next;
+            head = head.next;
+        }
+
+        return dummy.next;
+    }
+
+
+    /**
+     * 206. 反转链表
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        if (head == null) return null;
+
+        ListNode dummy = null;
+        ListNode next = null;
+
+        while (head != null) {
+            next = head.next;
+
+            head.next = dummy;
+            dummy = head;
+            head = next;
+        }
+        return dummy;
+    }
+
+
+    /**
+     * 24. 两两交换链表中的节点
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+
+        if (head == null || head.next == null) return head;
+
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+
+        return next;
 
     }
 
+
+    /**
+     * 61. 旋转链表
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+
+        int length = 0;
+
+        ListNode dummy = head;
+        ListNode tail = null;
+
+        while(head != null){
+            length++;
+            tail = head;
+            head = head.next;
+        }
+
+        int count = (Math.abs(k>length?k-length:length-k))%length;
+
+        tail.next = dummy;
+        ListNode pre = tail;
+
+        while(count-- > 0){
+            dummy = dummy.next;
+            pre = pre.next;
+        }
+
+        pre.next = null;
+
+        return dummy;
+    }
 }
