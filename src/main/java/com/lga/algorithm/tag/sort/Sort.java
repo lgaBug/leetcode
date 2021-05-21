@@ -1,5 +1,6 @@
 package com.lga.algorithm.tag.sort;
 
+import com.lga.algorithm.tag.eazy._258.AddDigits;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,7 +15,6 @@ import java.util.List;
 public class Sort {
 
 
-
     // 冒泡排序，a表示数组，n表示数组大小
     public void bubbleSort(int[] a, int n) {
         if (n <= 1) return;
@@ -23,10 +23,10 @@ public class Sort {
             // 提前退出冒泡循环的标志位
             boolean flag = false;
             for (int j = 0; j < n - i - 1; ++j) {
-                if (a[j] > a[j+1]) { // 交换
+                if (a[j] > a[j + 1]) { // 交换
                     int tmp = a[j];
-                    a[j] = a[j+1];
-                    a[j+1] = tmp;
+                    a[j] = a[j + 1];
+                    a[j + 1] = tmp;
                     flag = true;  // 表示有数据交换
                 }
             }
@@ -59,17 +59,17 @@ public class Sort {
 
     /**
      * 归并排序 时间复杂度O(nlogn)
+     *
      * @param arr
      */
-    public void mergeSort(int[] arr) {
-        mergesort_part(arr, 0, arr.length - 1);
-    }
-
+//    public void mergeSort(int[] arr) {
+//        mergesort_part(arr, 0, arr.length - 1);
+//    }
     private void mergesort_part(int[] arr, int p, int r) {
         if (p >= r) return;
 
         //获取中间的位置
-        int q = p + (r - p)/2;
+        int q = p + (r - p) / 2;
 
         //分冶递归
         mergesort_part(arr, p, q);
@@ -80,54 +80,124 @@ public class Sort {
 
     }
 
-    private void merge(int[] arr, int p, int q, int r) {
-
-        int i = p;
-        int j = q + 1;
-        int k = 0;
-        int[] temp = new int[r - p+1];
-
-        while (i <= q && j <= r) {
-            if (arr[i] <= arr[j]) {
-                temp[k++] = arr[i++];
-            } else {
-                temp[k++] = arr[j++];
-            }
-        }
-
-        // 判断哪个子数组中有剩余的数据
-        int start = i;
-        int end = q;
-        if (j <= r) {
-            start = j;
-            end = r;
-        }
-
-        //将多余的数据拷贝到temp中
-        while (start <= end) {
-            temp[k++] = arr[start++];
-        }
-
-        //值回写给arr
-        for (int num : temp) {
-            arr[p++] = num;
-        }
-
-    }
+//    private void merge(int[] arr, int p, int q, int r) {
+//
+//        int i = p;
+//        int j = q + 1;
+//        int k = 0;
+//        int[] temp = new int[r - p+1];
+//
+//        while (i <= q && j <= r) {
+//            if (arr[i] <= arr[j]) {
+//                temp[k++] = arr[i++];
+//            } else {
+//                temp[k++] = arr[j++];
+//            }
+//        }
+//
+//        // 判断哪个子数组中有剩余的数据
+//        int start = i;
+//        int end = q;
+//        if (j <= r) {
+//            start = j;
+//            end = r;
+//        }
+//
+//        //将多余的数据拷贝到temp中
+//        while (start <= end) {
+//            temp[k++] = arr[start++];
+//        }
+//
+//        //值回写给arr
+//        for (int num : temp) {
+//            arr[p++] = num;
+//        }
+//
+//    }
 
     /**
      * 快速排序算法
+     *
      * @param arr
      */
-    public void quickSort(int[] arr) {
-        quickSort_part(arr,0,arr.length-1);
+//    public void quickSort(int[] arr) {
+//        quickSort_part(arr, 0, arr.length - 1);
+//    }
+//
+//    private void quickSort_part(int[] arr, int p, int r) {
+//        if (p >= r) return;
+//        int q = partition(arr, p, r);
+//        quickSort_part(arr, p, q - 1);
+//        quickSort_part(arr, q + 1, r);
+//    }
+
+
+
+
+    /**
+     * 归并排序
+     *
+     * @param data
+     */
+    private void mergeSort(int[] data) {
+        mergeSortChild(data, 0, data.length - 1);
     }
 
-    private void quickSort_part(int[] arr, int p, int r) {
-        if(p>=r) return;
-        int q = partition(arr, p, r);
-        quickSort_part(arr, p, q-1);
-        quickSort_part(arr, q + 1, r);
+    private void mergeSortChild(int[] data, int l, int r) {
+        if (l >= r) return;
+
+        int mid = (l + r) / 2;
+
+        mergeSortChild(data, l, mid);
+        mergeSortChild(data, mid + 1, r);
+
+        merge(data, l, mid, r);
+    }
+
+    private void merge(int[] data, int l, int mid, int r) {
+
+        int i = l;
+        int j = mid + 1;
+        int k = 0;
+
+        int[] tempData = new int[r - l + 1];
+
+        while (i <= mid && j <= r) {
+            if (data[i] <= data[j]) {
+                tempData[k++] = data[i++];
+            } else {
+                tempData[k++] = data[j++];
+            }
+        }
+
+        while (j <= r) {
+            tempData[k++] = data[j++];
+        }
+
+        while (i <= mid) {
+            tempData[k++] = data[i++];
+        }
+
+        //值回写给data
+        for (int num : tempData) {
+            data[l++] = num;
+        }
+    }
+
+
+    public void quickSort(int[] data) {
+        quickSortChild(data, 0, data.length - 1);
+    }
+
+    private void quickSortChild(int[] data, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+
+        int p = partition(data, l, r);
+
+        quickSortChild(data, l, p-1);
+        quickSortChild(data, p + 1, r);
     }
 
     private int partition(int[] arr, int p, int r) {
@@ -136,9 +206,8 @@ public class Sort {
         for (int j = p; j < r; j++) {
             if (arr[j] < pivot) {
                 int temp = arr[i];
-                arr[i] = arr[j];
+                arr[i++] = arr[j];
                 arr[j] = temp;
-                i++;
             }
         }
         int temp = arr[i];
@@ -173,7 +242,7 @@ public class Sort {
     @Test
     public void test_bubbleSort() {
         int[] arr = new int[]{3, 2, 1, 6, 4, 5};
-        bubbleSort(arr,arr.length);
+        bubbleSort(arr, arr.length);
         Assert.assertTrue(Arrays.equals(new int[]{1, 2, 3, 4, 5, 6}, arr));
     }
 
