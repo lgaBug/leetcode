@@ -39,16 +39,7 @@ public class Tools {
 
     public static void main(String[] args) {
 
-        String str = "{\n" +
-                "    \"account_no\": \"69637C3B-100E-624C-0542-8FB8311F52FA\",\n" +
-                "    \"accountType\": \"ecard\",\n" +
-                "    \"isRectification\": false,\n" +
-                "    \"outTradeNo\": \"2105126271024156990\",\n" +
-                "    \"payType\": \"ecard\",\n" +
-                "    \"rectification\": false,\n" +
-                "    \"refundAmount\": 2213,\n" +
-                "    \"requestNo\": \"20210513RR6963012833\"\n" +
-                "}";
+        String str = "{\"extraInfo\":\"{\\\"origTradeNO\\\":\\\"MM00005579\\\",\\\"storeId\\\":\\\"7614\\\"}\",\"orderCurrency\":\"CNY\",\"outTradeNo\":\"MM000055790176141001\",\"payType\":\"ecard\",\"rectification\":false,\"refundAmount\":40,\"requestNo\":\"HA0002286761476141001\"}";
         System.out.println(camelToUnderline(str));
     }
 }
