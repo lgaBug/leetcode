@@ -18,4 +18,14 @@ public class DebugInvocationHandler implements InvocationHandler {
         System.out.println("执行之后");
         return result;
     }
+
+
+    public static void main(String[] args) {
+
+        Integer num1 = 99999;
+        Integer num2 = 99999;
+
+        System.out.println(num1.equals(num2));
+
+    }
 }
