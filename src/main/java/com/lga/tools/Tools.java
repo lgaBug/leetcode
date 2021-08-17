@@ -42,4 +42,10 @@ public class Tools {
         String str = "{\"extraInfo\":\"{\\\"origTradeNO\\\":\\\"MM00005579\\\",\\\"storeId\\\":\\\"7614\\\"}\",\"orderCurrency\":\"CNY\",\"outTradeNo\":\"MM000055790176141001\",\"payType\":\"ecard\",\"rectification\":false,\"refundAmount\":40,\"requestNo\":\"HA0002286761476141001\"}";
         System.out.println(camelToUnderline(str));
     }
+
+
+
+
+
+
 }
