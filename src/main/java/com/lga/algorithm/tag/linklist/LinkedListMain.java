@@ -259,4 +259,37 @@ public class LinkedListMain {
 
         return dummy;
     }
+
+    /**
+     * 25. K 个一组翻转链表
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+        if(head == null) return null;
+        ListNode a = head,b=head;
+
+        for (int i = 0; i < k; i++) {
+            if (b == null) return head;
+            b = b.next;
+        }
+        ListNode newNode = reverse(a,b);
+        a.next = reverseKGroup(b,k);
+        return newNode;
+    }
+
+    private ListNode reverse(ListNode a,ListNode b){
+        ListNode pre = null,next = a,cur = a;
+        while(cur != b){
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+
 }
