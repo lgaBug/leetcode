@@ -22,10 +22,7 @@ public class DebugInvocationHandler implements InvocationHandler {
 
     public static void main(String[] args) {
 
-        Integer num1 = 99999;
-        Integer num2 = 99999;
-
-        System.out.println(num1.equals(num2));
-
+        UserService userService = (UserService) JDKProxyFactory.getProxyObject(new UserServiceImpl());
+        userService.login();
     }
 }
