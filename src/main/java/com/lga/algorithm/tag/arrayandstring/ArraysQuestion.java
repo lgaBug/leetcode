@@ -43,15 +43,16 @@ public class ArraysQuestion {
         for (int[] interval : intervals) {
             if (idx == -1 || interval[0] > res[idx][1]) {
                 res[++idx] = interval;
-            }else{
+            } else {
                 res[idx][1] = Math.max(res[idx][1], interval[1]);
             }
         }
-        return Arrays.copyOf(res,idx+1);
+        return Arrays.copyOf(res, idx + 1);
     }
 
     /**
      * 旋转矩阵
+     *
      * @param matrix
      */
     public void rotate(int[][] matrix) {
@@ -62,11 +63,12 @@ public class ArraysQuestion {
                 res[j][length - i - 1] = matrix[i][j];
             }
         }
-        System.arraycopy(res,0,matrix,0,length);
+        System.arraycopy(res, 0, matrix, 0, length);
     }
 
     /**
      * 零矩阵
+     *
      * @param matrix
      */
     public void setZeroes(int[][] matrix) {
@@ -92,5 +94,34 @@ public class ArraysQuestion {
         }
 
     }
+
+
+    /**
+     * 移动零
+     *
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+
+        //统计零的个数
+        int zeroCount = 0;
+        //记录当前不为0的位置
+        int cur = 0;
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == 0){
+                zeroCount++;
+            }  else{
+                nums[cur++] = nums[i];
+            }
+        }
+
+        while (zeroCount > 0) {
+            nums[len - zeroCount--] = 0;
+        }
+
+    }
+
 
 }
