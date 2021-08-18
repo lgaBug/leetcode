@@ -14,6 +14,7 @@ public class ConstructMaximumBinaryTree {
      */
     public TreeNode constructMaximumBinaryTree(int[] nums) {
 
+
         if (nums == null || nums.length == 0) return null;
 
         int maxVal = Integer.MIN_VALUE;
