@@ -2,6 +2,8 @@ package com.lga.algorithm.tag.arrayandstring;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -123,5 +125,63 @@ public class ArraysQuestion {
 
     }
 
+    /**
+     * 76. 最小覆盖子串
+     * @param s
+     * @param t
+     * @return
+     */
+    public String minWindow(String s, String t) {
+        Map<Character,Integer> need = new HashMap();
+        Map<Character,Integer> window = new HashMap();
+
+        for(char c: t.toCharArray()) {
+            need.put(c,need.getOrDefault(c,0)+1);
+        }
+
+        int left = 0;
+        int right = 0;
+        int valid = 0;
+
+        // 记录最小覆盖子串的起始索引及长度
+        int start = 0, len = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            Character c = s.charAt(right);
+            right++;
+
+            if(need.containsKey(c)){
+                window.put(c,window.getOrDefault(c,0)+1);
+                if(need.get(c).equals(window.get(c))) valid ++;
+            }
+
+            //当窗口符合要求时
+            while (valid == need.size()) {
+                // 在这里更新最小覆盖子串
+                if (right - left < len) {
+                    start = left;
+                    len = right - left;
+                }
+
+                Character d = s.charAt(left);
+                left++;
+
+                if(need.containsKey(d)){
+                    if(window.get(d).equals(need.get(d))){
+                        valid--;
+                    }
+                    window.put(d,window.get(d)-1);
+                }
+            }
+        }
+
+        return len == Integer.MAX_VALUE?"":s.substring(start,len+start);
+    }
+
+    public static void main(String[] args) {
+
+        final ArraysQuestion arraysQuestion = new ArraysQuestion();
+        final String s = arraysQuestion.minWindow("ADOBECODEBANC", "ABC");
+        System.out.println("s = " + s);
+    }
 
 }
