@@ -1,9 +1,6 @@
 package com.lga.algorithm.tag.arrayandstring;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -177,11 +174,114 @@ public class ArraysQuestion {
         return len == Integer.MAX_VALUE?"":s.substring(start,len+start);
     }
 
+    /**
+     * 567. 字符串的排列
+     * @param t
+     * @param s
+     * @return
+     */
+    public boolean checkInclusion(String t, String s) {
+        Map<Character,Integer> need = new HashMap();
+        Map<Character,Integer> window = new HashMap();
+
+        for(char c: t.toCharArray()) {
+            need.put(c,need.getOrDefault(c,0)+1);
+        }
+
+        int left = 0;
+        int right = 0;
+        int valid = 0;
+
+        // 记录最小覆盖子串的起始索引及长度
+        while (right < s.length()) {
+            Character c = s.charAt(right);
+            right++;
+
+            if(need.containsKey(c)){
+                window.put(c,window.getOrDefault(c,0)+1);
+                if(need.get(c).equals(window.get(c))) valid ++;
+            }
+
+            while (right - left >= t.length()) {
+
+                if (valid == need.size()) return true;
+
+                Character d = s.charAt(left);
+                left++;
+
+                if(need.containsKey(d)){
+                    if(window.get(d).equals(need.get(d))){
+                        valid--;
+                    }
+                    window.put(d,window.get(d)-1);
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        return threeSumTarget(nums,0);
+    }
+
+    private List<List<Integer>> threeSumTarget(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new LinkedList<>();
+        int len = nums.length;
+
+        for(int i =0; i < len; i++) {
+            List<List<Integer>> tuples = twoSumTarget(nums,i+1,target - nums[i]);
+
+            for(List<Integer> tuple: tuples) {
+                tuple.add(nums[i]);
+                res.add(tuple);
+            }
+
+            // 跳过第一个数字重复的情况，否则会出现重复结果
+            while (i < len - 1 && nums[i] == nums[i + 1]) i++;
+        }
+
+        return res;
+    }
+
+    private List<List<Integer>> twoSumTarget(int[] nums,int start, int target) {
+
+        int left = start;
+        int right = nums.length - 1;
+        List<List<Integer>> res = new LinkedList<>();
+
+        while (left < right) {
+
+            int sum = nums[left] + nums[right];
+
+            if (sum == target){
+                LinkedList<Integer> re = new LinkedList<>();
+                re.add(nums[left]);
+                re.add(nums[right]);
+                res.add(re);
+                while (left < right && nums[left] == nums[left+1]) left++;
+                while (left < right && nums[right] == nums[right-1]) right--;
+                left++;
+                right--;
+            }else if(sum > target) {
+                right--;
+            }else if(sum < target) {
+                left++;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
 
         final ArraysQuestion arraysQuestion = new ArraysQuestion();
-        final String s = arraysQuestion.minWindow("ADOBECODEBANC", "ABC");
-        System.out.println("s = " + s);
+//        final String s = arraysQuestion.minWindow("ADOBECODEBANC", "ABC");
+//        System.out.println("s = " + s);
+
+//        arraysQuestion.checkInclusion("ab","eidboaoo");
+        arraysQuestion.threeSum(new int[]{-1, 0, 1, 2, -1, -4});
     }
 
 }
