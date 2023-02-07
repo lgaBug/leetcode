@@ -44,6 +44,11 @@ public class SingleLinkedList {
         }
     }
 
+    /**
+     * 删除节点
+     * @param val
+     * @return
+     */
     public boolean deleteNode(int val) {
 
         if (head == null) {
