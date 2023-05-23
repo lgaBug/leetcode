@@ -39,7 +39,12 @@ public class LRUCache {
         return map.getOrDefault(key, -1);
     }
 
+
     public void put(int key, int value) {
         map.put(key, value);
     }
+
+
+
 }
+
